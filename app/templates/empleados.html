@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Módulo de Empleados</h2>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>ID</th>
+        <th>Cédula</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+    </tr>
+
+    {% for empleado in empleados %}
+
+    <tr>
+        <td>{{ empleado.id_empleado }}</td>
+        <td>{{ empleado.cedula }}</td>
+        <td>{{ empleado.nombres }}</td>
+        <td>{{ empleado.apellidos }}</td>
+        <td>{{ empleado.telefono }}</td>
+        <td>{{ empleado.correo }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

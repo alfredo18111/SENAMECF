@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Módulo de Especializaciones</h2>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>ID</th>
+        <th>Especialización</th>
+    </tr>
+
+    {% for especializacion in especializaciones %}
+
+    <tr>
+        <td>{{ especializacion.id_especializacion }}</td>
+        <td>{{ especializacion.nombre_especializacion }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
