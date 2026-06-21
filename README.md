@@ -5,7 +5,11 @@ Sistema de Bienestar Social para la automatización y gestión en las áreas de 
 Integrantes
 
 - Gabriel Díaz
-- (Agregar demás integrantes)
+- Becker Viso
+- kleyver Barrios
+- Ricargo Serrano
+- Carlos Guaman
+- Manuel Mata
 
 Tecnologías utilizadas
 
