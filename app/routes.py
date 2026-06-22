@@ -18,6 +18,10 @@ def empleados():
         empleados=empleados
     )
 
+
+#-------------------------------------------------------------------------------------------------
+
+
 @main.route("/especializaciones/")
 def especializaciones():
 
@@ -27,6 +31,57 @@ def especializaciones():
         "especializaciones.html",
         especializaciones=especializaciones
     )
+
+@main.route("/especializaciones/nuevo", methods=["POST"])
+def nueva_especializacion():
+
+    especializacion = Especializacion(
+        nombre_especializacion=request.form["nombre"]
+    )
+
+    db.session.add(especializacion)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.especializaciones")
+    )
+    
+@main.route("/especializaciones/eliminar/<int:id>")
+def eliminar_especializacion(id):
+
+    especializacion = Especializacion.query.get_or_404(id)
+
+    db.session.delete(especializacion)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.especializaciones")
+    )
+    
+@main.route("/especializaciones/editar/<int:id>", methods=["GET", "POST"])
+def editar_especializacion(id):
+
+    especializacion = Especializacion.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        especializacion.nombre_especializacion = request.form["nombre"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for("main.especializaciones")
+        )
+
+    return render_template(
+        "editar_especializacion.html",
+        especializacion=especializacion
+    )
+
+
+
+#-------------------------------------------------------------------------------------------------
+
 
 @main.route("/empleados/nuevo", methods=["POST"])
 def nuevo_empleado():
@@ -75,3 +130,8 @@ def editar_empleado(id):
         "editar_empleado.html",
         empleado=empleado
     )
+
+
+#-------------------------------------------------------------------------------------------------
+
+

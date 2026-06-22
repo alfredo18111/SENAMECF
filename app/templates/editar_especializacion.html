@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Editar Especialización</h2>
+
+<form method="POST">
+
+    <label>Nombre:</label><br>
+
+    <input
+        type="text"
+        name="nombre"
+        value="{{ especializacion.nombre_especializacion }}"
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Guardar Cambios
+    </button>
+
+</form>
+
+{% endblock %}
