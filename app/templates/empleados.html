@@ -4,6 +4,33 @@
 
 <h2>Módulo de Empleados</h2>
 
+<h3>Registrar Empleado</h3>
+
+<form method="POST" action="/empleados/nuevo">
+
+    <label>Cédula:</label><br>
+    <input type="text" name="cedula"><br><br>
+
+    <label>Nombres:</label><br>
+    <input type="text" name="nombres"><br><br>
+
+    <label>Apellidos:</label><br>
+    <input type="text" name="apellidos"><br><br>
+
+    <label>Teléfono:</label><br>
+    <input type="text" name="telefono"><br><br>
+
+    <label>Correo:</label><br>
+    <input type="email" name="correo"><br><br>
+
+    <button type="submit">
+        Guardar Empleado
+    </button>
+
+</form>
+
+<hr>
+
 <table border="1" cellpadding="10">
 
     <tr>
@@ -13,6 +40,7 @@
         <th>Apellidos</th>
         <th>Teléfono</th>
         <th>Correo</th>
+        <th>Acciones</th>
     </tr>
 
     {% for empleado in empleados %}
@@ -24,6 +52,12 @@
         <td>{{ empleado.apellidos }}</td>
         <td>{{ empleado.telefono }}</td>
         <td>{{ empleado.correo }}</td>
+
+        <td>
+            <a href="/empleados/eliminar/{{ empleado.id_empleado }}">
+                Eliminar
+            </a>
+        </td>
     </tr>
 
     {% endfor %}
