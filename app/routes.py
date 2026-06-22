@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from app import db
-from app.models import Empleado, Especializacion
+from app.models import Empleado, Especializacion, Especialista
 
 main = Blueprint("main", __name__)
 
@@ -79,6 +79,80 @@ def editar_especializacion(id):
     )
 
 
+#-------------------------------------------------------------------------------------------------
+
+
+@main.route("/especialistas")
+def especialistas():
+    
+
+    especialistas = Especialista.query.all()
+
+    empleados = Empleado.query.all()
+
+    especializaciones = Especializacion.query.all()
+
+    return render_template(
+        "especialistas.html",
+        especialistas=especialistas,
+        empleados=empleados,
+        especializaciones=especializaciones
+    )
+
+@main.route("/especialistas/nuevo", methods=["POST"])
+def nuevo_especialista():
+
+    especialista = Especialista(
+        id_empleado=request.form["empleado"],
+        id_especializacion=request.form["especializacion"],
+        hora_inicio=request.form["hora_inicio"],
+        hora_fin=request.form["hora_fin"],
+        dias_disponibles=request.form["dias_disponibles"]
+    )
+
+    db.session.add(especialista)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.especialistas")
+    )
+
+@main.route("/especialistas/eliminar/<int:id>")
+def eliminar_especialista(id):
+
+    especialista = Especialista.query.get_or_404(id)
+
+    db.session.delete(especialista)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.especialistas")
+    )
+
+@main.route(
+    "/especialistas/editar/<int:id>",
+    methods=["GET", "POST"]
+)
+def editar_especialista(id):
+
+    especialista = Especialista.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        especialista.hora_inicio = request.form["hora_inicio"]
+        especialista.hora_fin = request.form["hora_fin"]
+        especialista.dias_disponibles = request.form["dias_disponibles"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for("main.especialistas")
+        )
+
+    return render_template(
+        "editar_especialista.html",
+        especialista=especialista
+    )
 
 #-------------------------------------------------------------------------------------------------
 

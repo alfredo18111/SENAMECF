@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Editar Especialista</h2>
+
+<form method="POST">
+
+    <label>Hora Inicio:</label><br>
+    <input
+        type="time"
+        name="hora_inicio"
+        value="{{ especialista.hora_inicio }}"
+    >
+
+    <br><br>
+
+    <label>Hora Fin:</label><br>
+    <input
+        type="time"
+        name="hora_fin"
+        value="{{ especialista.hora_fin }}"
+    >
+
+    <br><br>
+
+    <label>Días Disponibles:</label><br>
+    <input
+        type="text"
+        name="dias_disponibles"
+        value="{{ especialista.dias_disponibles }}"
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Guardar Cambios
+    </button>
+
+</form>
+
+{% endblock %}

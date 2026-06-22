@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Módulo de Especialistas</h2>
+
+<h3>Registrar Especialista</h3>
+
+<form action="/especialistas/nuevo" method="POST">
+
+    <label>Empleado:</label><br>
+
+    <select name="empleado">
+        {% for empleado in empleados %}
+        <option value="{{ empleado.id_empleado }}">
+            {{ empleado.nombres }} {{ empleado.apellidos }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Especialización:</label><br>
+
+    <select name="especializacion">
+        {% for especializacion in especializaciones %}
+        <option value="{{ especializacion.id_especializacion }}">
+            {{ especializacion.nombre_especializacion }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Hora Inicio:</label><br>
+    <input type="time" name="hora_inicio">
+
+    <br><br>
+
+    <label>Hora Fin:</label><br>
+    <input type="time" name="hora_fin">
+
+    <br><br>
+
+    <label>Días Disponibles:</label><br>
+    <input type="text" name="dias_disponibles">
+
+    <br><br>
+
+    <button type="submit">
+        Guardar Especialista
+    </button>
+
+</form>
+
+<br>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>Empleado</th>
+        <th>Especialización</th>
+        <th>Hora Inicio</th>
+        <th>Hora Fin</th>
+        <th>Días</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for especialista in especialistas %}
+
+    <tr>
+
+        <td>
+            {{ especialista.empleado.nombres }}
+            {{ especialista.empleado.apellidos }}
+        </td>
+
+        <td>
+            {{ especialista.especializacion.nombre_especializacion }}
+        </td>
+
+        <td>{{ especialista.hora_inicio }}</td>
+
+        <td>{{ especialista.hora_fin }}</td>
+
+        <td>{{ especialista.dias_disponibles }}</td>
+
+        <td>
+        <a href="/especialistas/editar/{{ especialista.id_empleado }}">
+            Editar
+        </a>
+
+        <a href="/especialistas/eliminar/{{ especialista.id_empleado }}">
+            Eliminar
+        </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

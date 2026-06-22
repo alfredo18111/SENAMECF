@@ -11,6 +11,9 @@ class Rol(db.Model):
         return f"<Rol {self.nombre_rol}>"
 
 
+#-------------------------------------------------------------------------------------------------
+
+
 class Empleado(db.Model):
     _tablename_ = "empleado"
 
@@ -25,6 +28,9 @@ class Empleado(db.Model):
         return f"<Empleado {self.nombres}>"
 
 
+#-------------------------------------------------------------------------------------------------
+
+
 class Especializacion(db.Model):
     _tablename_ = "especializacion"
 
@@ -33,6 +39,9 @@ class Especializacion(db.Model):
 
     def _repr_(self):
         return f"<Especializacion {self.nombre_especializacion}>"
+
+
+#-------------------------------------------------------------------------------------------------
 
 
 class Usuario(db.Model):
@@ -57,6 +66,9 @@ class Usuario(db.Model):
         return f"<Usuario {self.usuario}>"
 
 
+#-------------------------------------------------------------------------------------------------
+
+
 class Especialista(db.Model):
     _tablename_ = "especialista"
 
@@ -74,9 +86,22 @@ class Especialista(db.Model):
     hora_inicio = db.Column(db.Time)
     hora_fin = db.Column(db.Time)
     dias_disponibles = db.Column(db.String(100))
+    
+    empleado = db.relationship(
+        "Empleado",
+        backref="especialistas"
+    )
+
+    especializacion = db.relationship(
+        "Especializacion",
+        backref="especialistas"
+    )
 
     def _repr_(self):
         return f"<Especialista {self.id_empleado}>"
+
+
+#-------------------------------------------------------------------------------------------------
 
 
 class Cita(db.Model):
