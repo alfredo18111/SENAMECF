@@ -53,3 +53,25 @@ def eliminar_empleado(id):
     db.session.commit()
 
     return redirect(url_for("main.empleados"))
+
+@main.route("/empleados/editar/<int:id>", methods=["GET", "POST"])
+def editar_empleado(id):
+
+    empleado = Empleado.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        empleado.cedula = request.form["cedula"]
+        empleado.nombres = request.form["nombres"]
+        empleado.apellidos = request.form["apellidos"]
+        empleado.telefono = request.form["telefono"]
+        empleado.correo = request.form["correo"]
+
+        db.session.commit()
+
+        return redirect(url_for("main.empleados"))
+
+    return render_template(
+        "editar_empleado.html",
+        empleado=empleado
+    )

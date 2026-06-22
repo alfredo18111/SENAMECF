@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Editar Empleado</h2>
+
+<form method="POST">
+
+    <label>Cédula:</label><br>
+    <input type="text" name="cedula" value="{{ empleado.cedula }}"><br><br>
+
+    <label>Nombres:</label><br>
+    <input type="text" name="nombres" value="{{ empleado.nombres }}"><br><br>
+
+    <label>Apellidos:</label><br>
+    <input type="text" name="apellidos" value="{{ empleado.apellidos }}"><br><br>
+
+    <label>Teléfono:</label><br>
+    <input type="text" name="telefono" value="{{ empleado.telefono }}"><br><br>
+
+    <label>Correo:</label><br>
+    <input type="email" name="correo" value="{{ empleado.correo }}"><br><br>
+
+    <button type="submit">Guardar Cambios</button>
+
+</form>
+
+{% endblock %}

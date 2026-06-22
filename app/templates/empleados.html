@@ -53,11 +53,18 @@
         <td>{{ empleado.telefono }}</td>
         <td>{{ empleado.correo }}</td>
 
-        <td>
-            <a href="/empleados/eliminar/{{ empleado.id_empleado }}">
-                Eliminar
-            </a>
-        </td>
+<td style="text-align:center;">
+    <a href="/empleados/editar/{{ empleado.id_empleado }}" style="text-decoration:none;">
+        ✏️ Editar
+    </a>
+
+    |
+
+    <a href="/empleados/eliminar/{{ empleado.id_empleado }}" style="text-decoration:none;">
+        🗑️ Eliminar
+    </a>
+</td>
+
     </tr>
 
     {% endfor %}
