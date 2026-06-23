@@ -1,15 +1,35 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from app import db
-from app.models import Empleado, Especializacion, Especialista
+from app.models import Empleado, Especializacion, Especialista, Rol, Usuario, Cita
 
 main = Blueprint("main", __name__)
 
 @main.route("/")
 def inicio():
-    return render_template("index.html")
+
+    if "usuario" not in session:
+        return redirect(url_for("main.login"))
+    
+    total_empleados = Empleado.query.count()
+    total_especialistas = Especialista.query.count()
+    total_especializaciones = Especializacion.query.count()
+    total_usuarios = Usuario.query.count()
+    total_citas = Cita.query.count()
+
+    return render_template(
+    "index.html",
+    total_empleados=total_empleados,
+    total_especialistas=total_especialistas,
+    total_especializaciones=total_especializaciones,
+    total_usuarios=total_usuarios,
+    total_citas=total_citas
+)
 
 @main.route("/empleados")
 def empleados():
+    
+    if "usuario" not in session:
+        return redirect(url_for("main.login"))
 
     empleados = Empleado.query.all()
 
@@ -24,6 +44,9 @@ def empleados():
 
 @main.route("/especializaciones/")
 def especializaciones():
+    
+    if "usuario" not in session:
+        return redirect(url_for("main.login"))
 
     especializaciones = Especializacion.query.all()
 
@@ -84,6 +107,9 @@ def editar_especializacion(id):
 
 @main.route("/especialistas")
 def especialistas():
+    
+    if "usuario" not in session:
+        return redirect(url_for("main.login"))
     
 
     especialistas = Especialista.query.all()
@@ -157,8 +183,148 @@ def editar_especialista(id):
 #-------------------------------------------------------------------------------------------------
 
 
+@main.route("/roles/")
+def roles():
+    
+    if "usuario" not in session:
+        return redirect(url_for("main.login"))
+
+    roles = Rol.query.all()
+
+    return render_template(
+        "roles.html",
+        roles=roles
+    )
+
+@main.route("/roles/nuevo", methods=["POST"])
+def nuevo_rol():
+
+    rol = Rol(
+        nombre_rol=request.form["nombre_rol"],
+        descripcion=request.form["descripcion"]
+    )
+
+    db.session.add(rol)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.roles")
+    )
+
+@main.route("/roles/eliminar/<int:id>")
+def eliminar_rol(id):
+
+    rol = Rol.query.get_or_404(id)
+
+    db.session.delete(rol)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.roles")
+    )
+
+@main.route("/roles/editar/<int:id>", methods=["GET", "POST"])
+def editar_rol(id):
+
+    rol = Rol.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        rol.nombre_rol = request.form["nombre_rol"]
+        rol.descripcion = request.form["descripcion"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for("main.roles")
+        )
+
+    return render_template(
+        "editar_rol.html",
+        rol=rol
+    )
+
+
+#-------------------------------------------------------------------------------------------------
+
+
+@main.route("/usuarios/")
+def usuarios():
+    
+    if "usuario" not in session:
+        return redirect(url_for("main.login"))
+
+    usuarios = Usuario.query.all()
+    empleados = Empleado.query.all()
+    roles = Rol.query.all()
+
+    return render_template(
+        "usuarios.html",
+        usuarios=usuarios,
+        empleados=empleados,
+        roles=roles
+    )
+    
+@main.route("/usuarios/nuevo", methods=["POST"])
+def nuevo_usuario():
+
+    usuario = Usuario(
+        usuario=request.form["usuario"],
+        clave=request.form["clave"],
+        estado=request.form["estado"],
+        id_empleado=request.form["id_empleado"],
+        id_rol=request.form["id_rol"]
+    )
+
+    db.session.add(usuario)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.usuarios")
+    )
+    
+@main.route("/usuarios/eliminar/<int:id>")
+def eliminar_usuario(id):
+
+    usuario = Usuario.query.get_or_404(id)
+
+    db.session.delete(usuario)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.usuarios")
+    )
+    
+@main.route("/usuarios/editar/<int:id>", methods=["GET", "POST"])
+def editar_usuario(id):
+
+    usuario = Usuario.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        usuario.usuario = request.form["usuario"]
+        usuario.clave = request.form["clave"]
+        usuario.estado = request.form["estado"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for("main.usuarios")
+        )
+
+    return render_template(
+        "editar_usuario.html",
+        usuario=usuario
+    )
+
+#-------------------------------------------------------------------------------------------------
+
+
 @main.route("/empleados/nuevo", methods=["POST"])
 def nuevo_empleado():
+    
+    if "usuario" not in session:
+        return redirect(url_for("main.login"))
 
     empleado = Empleado(
         cedula=request.form["cedula"],
@@ -209,3 +375,115 @@ def editar_empleado(id):
 #-------------------------------------------------------------------------------------------------
 
 
+@main.route("/citas/")
+def citas():
+    
+    if "usuario" not in session:
+        return redirect(url_for("main.login"))
+
+    citas = Cita.query.all()
+    empleados = Empleado.query.all()
+    especialistas = Especialista.query.all()
+
+    return render_template(
+        "citas.html",
+        citas=citas,
+        empleados=empleados,
+        especialistas=especialistas
+    )
+
+@main.route("/citas/nuevo", methods=["POST"])
+def nueva_cita():
+
+    cita = Cita(
+        fecha_cita=request.form["fecha_cita"],
+        hora_cita=request.form["hora_cita"],
+        id_empleado=request.form["id_empleado"],
+        id_empleado_especialista=request.form["id_empleado_especialista"],
+        estado_cita=request.form["estado_cita"]
+    )
+
+    db.session.add(cita)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.citas")
+    )
+
+@main.route("/citas/eliminar/<int:id>")
+def eliminar_cita(id):
+
+    cita = Cita.query.get_or_404(id)
+
+    db.session.delete(cita)
+    db.session.commit()
+
+    return redirect(
+        url_for("main.citas")
+    )
+
+
+@main.route("/citas/editar/<int:id>", methods=["GET", "POST"])
+def editar_cita(id):
+
+    cita = Cita.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        cita.fecha_cita = request.form["fecha_cita"]
+        cita.hora_cita = request.form["hora_cita"]
+        cita.estado_cita = request.form["estado_cita"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for("main.citas")
+        )
+
+    return render_template(
+        "editar_cita.html",
+        cita=cita
+    )
+    
+#-------------------------------------------------------------------------------------------------
+
+@main.route("/login", methods=["GET", "POST"])
+def login():
+    
+
+    if request.method == "POST":
+
+        usuario_ingresado = request.form["usuario"]
+        clave_ingresada = request.form["clave"]
+
+        usuario = Usuario.query.filter_by(
+            usuario=usuario_ingresado
+        ).first()
+
+        if usuario:
+
+            if usuario.clave == clave_ingresada:
+
+                if usuario.estado == "Activo":
+                    session["usuario"] = usuario.usuario
+
+                    return redirect(
+                        url_for("main.inicio")
+                    )
+
+        return "Usuario o clave incorrectos"
+
+    return render_template("login.html")
+
+
+#-------------------------------------------------------------------------------------------------
+
+
+@main.route("/logout")
+def logout():
+
+    session.pop("usuario", None)
+
+    return redirect(
+        url_for("main.login")
+    )

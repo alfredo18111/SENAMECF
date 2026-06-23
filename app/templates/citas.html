@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h1>Módulo de Citas</h1>
+
+<h2>Registrar Cita</h2>
+
+<form method="POST" action="{{ url_for('main.nueva_cita') }}">
+
+    <label>Empleado:</label><br>
+
+    <select name="id_empleado">
+
+        {% for empleado in empleados %}
+        <option value="{{ empleado.id_empleado }}">
+            {{ empleado.nombres }}
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Especialista:</label><br>
+
+    <select name="id_empleado_especialista">
+
+                {% for especialista in especialistas %}
+        <option value="{{ especialista.id_empleado }}">
+            {{ especialista.empleado.nombres }}
+            {{ especialista.empleado.apellidos }}
+            -
+            {{ especialista.especializacion.nombre_especializacion }}
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Fecha:</label><br>
+    <input type="date" name="fecha_cita">
+
+    <br><br>
+
+    <label>Hora:</label><br>
+    <input type="time" name="hora_cita">
+
+    <br><br>
+
+    <label>Estado:</label><br>
+
+    <select name="estado_cita">
+        <option value="Pendiente">Pendiente</option>
+        <option value="Atendida">Atendida</option>
+        <option value="Cancelada">Cancelada</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Guardar Cita
+    </button>
+
+</form>
+
+<br>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>ID</th>
+        <th>Empleado</th>
+        <th>Especialista</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for cita in citas %}
+    <tr>
+
+        <td>{{ cita.id_cita }}</td>
+        <td>{{ cita.empleado.nombres }} {{ cita.empleado.apellidos }}</td>
+        <td>{{ cita.especialista.empleado.nombres }} {{ cita.especialista.empleado.apellidos }} - {{ cita.especialista.especializacion.nombre_especializacion }}</td>
+        <td>{{ cita.fecha_cita }}</td>
+        <td>{{ cita.hora_cita }}</td>
+        <td>{{ cita.estado_cita }}</td>
+        
+        <td>
+    <a href="{{ url_for('main.editar_cita', id=cita.id_cita) }}">
+        Editar
+    </a>
+    |
+    <a href="{{ url_for('main.eliminar_cita', id=cita.id_cita) }}">
+        Eliminar
+    </a>
+</td>
+
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

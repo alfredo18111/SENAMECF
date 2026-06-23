@@ -61,6 +61,8 @@ class Usuario(db.Model):
         db.Integer,
         db.ForeignKey('rol.id_rol')
     )
+    empleado = db.relationship("Empleado")
+    rol = db.relationship("Rol")
 
     def _repr_(self):
         return f"<Usuario {self.usuario}>"
@@ -123,6 +125,18 @@ class Cita(db.Model):
     )
 
     estado_cita = db.Column(db.String(30))
+    
+    empleado = db.relationship(
+    "Empleado",
+    foreign_keys=[id_empleado]
+)
+
+    especialista = db.relationship(
+        "Especialista",
+        foreign_keys=[id_empleado_especialista]
+    )
+    
+        
 
     def _repr_(self):
         return f"<Cita {self.id_cita}>"

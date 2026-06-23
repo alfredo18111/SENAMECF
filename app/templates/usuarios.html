@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h1>Módulo de Usuarios</h1>
+
+<h2>Registrar Usuario</h2>
+
+<form action="{{ url_for('main.nuevo_usuario') }}" method="POST">
+
+<label>Empleado:</label><br>
+
+<select name="id_empleado">
+{% for empleado in empleados %}
+<option value="{{ empleado.id_empleado }}">
+{{ empleado.nombres }} {{ empleado.apellidos }}
+</option>
+{% endfor %}
+</select>
+
+<br><br>
+
+<label>Rol:</label><br>
+
+<select name="id_rol">
+{% for rol in roles %}
+<option value="{{ rol.id_rol }}">
+{{ rol.nombre_rol }}
+</option>
+{% endfor %}
+</select>
+
+<br><br>
+
+<label>Usuario:</label><br>
+<input type="text" name="usuario">
+
+<br><br>
+
+<label>Clave:</label><br>
+<input type="password" name="clave">
+
+<br><br>
+
+<label>Estado:</label><br>
+
+<select name="estado">
+<option value="Activo">Activo</option>
+<option value="Inactivo">Inactivo</option>
+</select>
+
+<br><br>
+
+<button type="submit">
+Guardar Usuario
+</button>
+
+</form>
+
+<br>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Empleado</th>
+        <th>Rol</th>
+        <th>Usuario</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for usuario in usuarios %}
+    <tr>
+        <td>{{ usuario.id_usuario }}</td>
+        <td>{{ usuario.empleado.nombres }}</td>
+        <td>{{ usuario.rol.nombre_rol }}</td>
+        <td>{{ usuario.usuario }}</td>
+        <td>{{ usuario.estado }}</td>
+
+        <td>
+            <a href="{{ url_for('main.editar_usuario', id=usuario.id_usuario) }}">
+                Editar
+            </a>
+            |
+            <a href="{{ url_for('main.eliminar_usuario', id=usuario.id_usuario) }}">
+                Eliminar
+            </a>
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

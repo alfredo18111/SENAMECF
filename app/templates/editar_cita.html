@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h1>Editar Cita</h1>
+
+<form method="POST">
+
+    <label>Fecha:</label><br>
+    <input
+        type="date"
+        name="fecha_cita"
+        value="{{ cita.fecha_cita }}"
+    >
+
+    <br><br>
+
+    <label>Hora:</label><br>
+    <input
+        type="time"
+        name="hora_cita"
+        value="{{ cita.hora_cita }}"
+    >
+
+    <br><br>
+
+    <label>Estado:</label><br>
+
+    <select name="estado_cita">
+
+        <option value="Pendiente"
+        {% if cita.estado_cita == "Pendiente" %}
+        selected
+        {% endif %}
+        >
+            Pendiente
+        </option>
+
+        <option value="Atendida"
+        {% if cita.estado_cita == "Atendida" %}
+        selected
+        {% endif %}
+        >
+            Atendida
+        </option>
+
+        <option value="Cancelada"
+        {% if cita.estado_cita == "Cancelada" %}
+        selected
+        {% endif %}
+        >
+            Cancelada
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Guardar Cambios
+    </button>
+
+</form>
+
+{% endblock %}

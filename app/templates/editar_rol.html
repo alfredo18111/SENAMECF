@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Editar Rol</h2>
+
+<form method="POST">
+
+    <label>Nombre del Rol:</label><br>
+    <input
+        type="text"
+        name="nombre_rol"
+        value="{{ rol.nombre_rol }}"
+    >
+
+    <br><br>
+
+    <label>Descripción:</label><br>
+    <input
+        type="text"
+        name="descripcion"
+        value="{{ rol.descripcion }}"
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Guardar Cambios
+    </button>
+
+</form>
+
+{% endblock %}

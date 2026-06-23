@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Módulo de Roles</h2>
+
+<h3>Registrar Rol</h3>
+
+<form action="/roles/nuevo" method="POST">
+
+    <label>Nombre del Rol:</label><br>
+    <input type="text" name="nombre_rol">
+
+    <br><br>
+
+    <label>Descripción:</label><br>
+    <input type="text" name="descripcion">
+
+    <br><br>
+
+    <button type="submit">
+        Guardar Rol
+    </button>
+
+</form>
+
+<br>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>ID</th>
+        <th>Rol</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for rol in roles %}
+
+    <tr>
+        <td>{{ rol.id_rol }}</td>
+        <td>{{ rol.nombre_rol }}</td>
+        <td>{{ rol.descripcion }}</td>
+
+        <td>
+            <a href="/roles/editar/{{ rol.id_rol }}">
+                Editar
+            </a>
+
+            |
+
+            <a href="/roles/eliminar/{{ rol.id_rol }}">
+                Eliminar
+            </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

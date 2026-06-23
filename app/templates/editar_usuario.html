@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h1>Editar Usuario</h1> 
+
+
+<form method="POST">
+
+    <label>Usuario:</label><br>
+    <input type="text"
+           name="usuario"
+           value="{{ usuario.usuario }}">
+
+    <br><br>
+
+    <label>Clave:</label><br>
+    <input type="text"
+           name="clave"
+           value="{{ usuario.clave }}">
+
+    <br><br>
+
+    <label>Estado:</label><br>
+
+    <select name="estado">
+
+        <option value="Activo"
+        {% if usuario.estado == "Activo" %}
+        selected
+        {% endif %}
+        >
+            Activo
+        </option>
+
+        <option value="Inactivo"
+        {% if usuario.estado == "Inactivo" %}
+        selected
+        {% endif %}
+        >
+            Inactivo
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Guardar Cambios
+    </button>
+
+</form>
+
+{% endblock %}
