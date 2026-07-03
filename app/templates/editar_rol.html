@@ -1,33 +1,24 @@
 {% extends "base.html" %}
 
+{% block titulo %}Editar rol{% endblock %}
+{% block crumb %}Seguridad · Roles · <b>Editar</b>{% endblock %}
+{% block encabezado %}Editar rol{% endblock %}
+
 {% block contenido %}
 
-<h2>Editar Rol</h2>
-
-<form method="POST">
-
-    <label>Nombre del Rol:</label><br>
-    <input
-        type="text"
-        name="nombre_rol"
-        value="{{ rol.nombre_rol }}"
-    >
-
-    <br><br>
-
-    <label>Descripción:</label><br>
-    <input
-        type="text"
-        name="descripcion"
-        value="{{ rol.descripcion }}"
-    >
-
-    <br><br>
-
-    <button type="submit">
-        Guardar Cambios
-    </button>
-
-</form>
+<section class="card" style="max-width:620px">
+    <div class="card-h">
+        <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></div>
+        <div><h2>{{ rol.nombre_rol }}</h2><p>Actualiza el rol y su descripción</p></div>
+    </div>
+    <form class="form cols-2" method="POST">
+        <div class="field"><label>Nombre del rol</label><input type="text" name="nombre_rol" value="{{ rol.nombre_rol }}"></div>
+        <div class="field"><label>Descripción</label><input type="text" name="descripcion" value="{{ rol.descripcion }}"></div>
+        <div class="form-foot">
+            <a href="/roles" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Cancelar</a>
+            <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Guardar cambios</button>
+        </div>
+    </form>
+</section>
 
 {% endblock %}

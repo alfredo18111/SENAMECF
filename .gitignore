@@ -13,3 +13,6 @@ _pycache_/
 
 # Archivos temporales
 *.log
+
+# Base de datos local (SQLite de pruebas)
+*.db

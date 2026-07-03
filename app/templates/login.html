@@ -1,63 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Iniciar Sesión</title>
-    <style>
-    body{
-        font-family: Arial, sans-serif;
-        background-color: #f4f6f9;
-
-        display:flex;
-        justify-content:center;
-        align-items:center;
-
-        height:100vh;
-    }
-
-    .login-container{
-        background:white;
-        padding:40px;
-        border-radius:10px;
-
-        box-shadow:0px 0px 10px rgba(0,0,0,0.2);
-
-        text-align:center;
-        width:350px;
-    }
-
-    .login-container input{
-        width:90%;
-        padding:10px;
-    }
-
-    .login-container button{
-        width:95%;
-        padding:10px;
-    }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAMECF · Iniciar sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/senamecf.css') }}">
 </head>
 <body>
 
-    <div class="login-container">
-    <h1>SENAMECF</h1>
-    <P>Sistema de Bienestar Social</p>
-
-    <form method="POST">
-
-        <label>Usuario:</label><br>
-        <input type="text" name="usuario" required>
-        <br><br>
-
-        <label>Clave:</label><br>
-        <input type="password" name="clave" required>
-        <br><br>
-
-        <button type="submit">
-            Ingresar
-        </button>
-
-    </form>
+<div class="login-wrap">
+    <div class="login-card">
+        <div class="login-head">
+            <div class="login-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v14"/><path d="M6 20h12"/><path d="M12 16l-4 4"/><path d="M12 16l4 4"/>
+                    <path d="M7 6h10"/><circle cx="7" cy="6" r="1.4"/><circle cx="17" cy="6" r="1.4"/>
+                </svg>
+            </div>
+            <h1>SENAMECF</h1>
+            <p>Sistema de Bienestar Social</p>
+            <div class="ribbon"><i style="background:var(--yellow)"></i><i style="background:var(--blue-600)"></i><i style="background:var(--red)"></i></div>
+        </div>
+        <div class="login-body">
+            <h2>Iniciar sesión</h2>
+            <p class="sub">Ingresa tus credenciales para acceder al sistema</p>
+            <form method="POST">
+                <div class="login-field">
+                    <label>Usuario</label>
+                    <input type="text" name="usuario" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="login-field">
+                    <label>Clave</label>
+                    <input type="password" name="clave" placeholder="••••••••" required>
+                </div>
+                <button class="login-btn" type="submit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+                    Ingresar
+                </button>
+            </form>
+            <div class="login-foot">SENAMECF · Talento Humano y Servicios Médicos</div>
+        </div>
     </div>
+</div>
 
 </body>
 </html>

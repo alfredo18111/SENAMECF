@@ -1,42 +1,25 @@
 {% extends "base.html" %}
 
+{% block titulo %}Editar especialista{% endblock %}
+{% block crumb %}Servicios Médicos · Especialistas · <b>Editar</b>{% endblock %}
+{% block encabezado %}Editar especialista{% endblock %}
+
 {% block contenido %}
 
-<h2>Editar Especialista</h2>
-
-<form method="POST">
-
-    <label>Hora Inicio:</label><br>
-    <input
-        type="time"
-        name="hora_inicio"
-        value="{{ especialista.hora_inicio }}"
-    >
-
-    <br><br>
-
-    <label>Hora Fin:</label><br>
-    <input
-        type="time"
-        name="hora_fin"
-        value="{{ especialista.hora_fin }}"
-    >
-
-    <br><br>
-
-    <label>Días Disponibles:</label><br>
-    <input
-        type="text"
-        name="dias_disponibles"
-        value="{{ especialista.dias_disponibles }}"
-    >
-
-    <br><br>
-
-    <button type="submit">
-        Guardar Cambios
-    </button>
-
-</form>
+<section class="card" style="max-width:620px">
+    <div class="card-h">
+        <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></div>
+        <div><h2>{{ especialista.empleado.nombres }} {{ especialista.empleado.apellidos }}</h2><p>Actualiza el horario y disponibilidad</p></div>
+    </div>
+    <form class="form cols-2" method="POST">
+        <div class="field"><label>Hora inicio</label><input type="time" name="hora_inicio" value="{{ especialista.hora_inicio }}"></div>
+        <div class="field"><label>Hora fin</label><input type="time" name="hora_fin" value="{{ especialista.hora_fin }}"></div>
+        <div class="field span2"><label>Días disponibles</label><input type="text" name="dias_disponibles" value="{{ especialista.dias_disponibles }}"></div>
+        <div class="form-foot">
+            <a href="/especialistas" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Cancelar</a>
+            <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Guardar cambios</button>
+        </div>
+    </form>
+</section>
 
 {% endblock %}

@@ -1,54 +1,30 @@
 {% extends "base.html" %}
 
+{% block titulo %}Editar usuario{% endblock %}
+{% block crumb %}Seguridad · Usuarios · <b>Editar</b>{% endblock %}
+{% block encabezado %}Editar usuario{% endblock %}
+
 {% block contenido %}
 
-<h1>Editar Usuario</h1> 
-
-
-<form method="POST">
-
-    <label>Usuario:</label><br>
-    <input type="text"
-           name="usuario"
-           value="{{ usuario.usuario }}">
-
-    <br><br>
-
-    <label>Clave:</label><br>
-    <input type="text"
-           name="clave"
-           value="{{ usuario.clave }}">
-
-    <br><br>
-
-    <label>Estado:</label><br>
-
-    <select name="estado">
-
-        <option value="Activo"
-        {% if usuario.estado == "Activo" %}
-        selected
-        {% endif %}
-        >
-            Activo
-        </option>
-
-        <option value="Inactivo"
-        {% if usuario.estado == "Inactivo" %}
-        selected
-        {% endif %}
-        >
-            Inactivo
-        </option>
-
-    </select>
-
-    <br><br>
-
-    <button type="submit">
-        Guardar Cambios
-    </button>
-
-</form>
+<section class="card" style="max-width:620px">
+    <div class="card-h">
+        <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></div>
+        <div><h2>{{ usuario.usuario }}</h2><p>Actualiza las credenciales y el estado</p></div>
+    </div>
+    <form class="form cols-2" method="POST">
+        <div class="field"><label>Usuario</label><input type="text" name="usuario" value="{{ usuario.usuario }}"></div>
+        <div class="field"><label>Clave</label><input type="text" name="clave" value="{{ usuario.clave }}"></div>
+        <div class="field span2"><label>Estado</label>
+            <select name="estado">
+                <option value="Activo" {% if usuario.estado == "Activo" %}selected{% endif %}>Activo</option>
+                <option value="Inactivo" {% if usuario.estado == "Inactivo" %}selected{% endif %}>Inactivo</option>
+            </select>
+        </div>
+        <div class="form-foot">
+            <a href="/usuarios" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Cancelar</a>
+            <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Guardar cambios</button>
+        </div>
+    </form>
+</section>
 
 {% endblock %}

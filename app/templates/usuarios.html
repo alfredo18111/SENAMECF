@@ -1,94 +1,76 @@
 {% extends "base.html" %}
 
+{% block titulo %}Usuarios{% endblock %}
+{% block crumb %}Seguridad · <b>Usuarios</b>{% endblock %}
+{% block encabezado %}Módulo de Usuarios{% endblock %}
+
 {% block contenido %}
 
-<h1>Módulo de Usuarios</h1>
+<section class="card">
+    <div class="card-h">
+        <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div>
+        <div><h2>Registrar usuario</h2><p>Crea una cuenta de acceso vinculada a un empleado</p></div>
+    </div>
+    <form class="form" action="{{ url_for('main.nuevo_usuario') }}" method="POST">
+        <div class="field"><label>Empleado</label>
+            <select name="id_empleado">
+                {% for empleado in empleados %}
+                <option value="{{ empleado.id_empleado }}">{{ empleado.nombres }} {{ empleado.apellidos }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field"><label>Rol</label>
+            <select name="id_rol">
+                {% for rol in roles %}
+                <option value="{{ rol.id_rol }}">{{ rol.nombre_rol }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field"><label>Estado</label>
+            <select name="estado">
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+        </div>
+        <div class="field"><label>Usuario</label><input type="text" name="usuario" placeholder="jperez"></div>
+        <div class="field"><label>Clave</label><input type="password" name="clave" placeholder="••••••••"></div>
+        <div class="form-foot">
+            <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>Guardar usuario</button>
+        </div>
+    </form>
+</section>
 
-<h2>Registrar Usuario</h2>
-
-<form action="{{ url_for('main.nuevo_usuario') }}" method="POST">
-
-<label>Empleado:</label><br>
-
-<select name="id_empleado">
-{% for empleado in empleados %}
-<option value="{{ empleado.id_empleado }}">
-{{ empleado.nombres }} {{ empleado.apellidos }}
-</option>
-{% endfor %}
-</select>
-
-<br><br>
-
-<label>Rol:</label><br>
-
-<select name="id_rol">
-{% for rol in roles %}
-<option value="{{ rol.id_rol }}">
-{{ rol.nombre_rol }}
-</option>
-{% endfor %}
-</select>
-
-<br><br>
-
-<label>Usuario:</label><br>
-<input type="text" name="usuario">
-
-<br><br>
-
-<label>Clave:</label><br>
-<input type="password" name="clave">
-
-<br><br>
-
-<label>Estado:</label><br>
-
-<select name="estado">
-<option value="Activo">Activo</option>
-<option value="Inactivo">Inactivo</option>
-</select>
-
-<br><br>
-
-<button type="submit">
-Guardar Usuario
-</button>
-
-</form>
-
-<br>
-
-<table border="1" cellpadding="10">
-    <tr>
-        <th>ID</th>
-        <th>Empleado</th>
-        <th>Rol</th>
-        <th>Usuario</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-    </tr>
-
-    {% for usuario in usuarios %}
-    <tr>
-        <td>{{ usuario.id_usuario }}</td>
-        <td>{{ usuario.empleado.nombres }}</td>
-        <td>{{ usuario.rol.nombre_rol }}</td>
-        <td>{{ usuario.usuario }}</td>
-        <td>{{ usuario.estado }}</td>
-
-        <td>
-            <a href="{{ url_for('main.editar_usuario', id=usuario.id_usuario) }}">
-                Editar
-            </a>
-            |
-            <a href="{{ url_for('main.eliminar_usuario', id=usuario.id_usuario) }}">
-                Eliminar
-            </a>
-        </td>
-
-    </tr>
-    {% endfor %}
-</table>
+<section class="card">
+    <div class="tbar">
+        <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input class="js-search" placeholder="Buscar por usuario, empleado o rol…">
+        </div>
+        <div class="count"><b class="js-count">{{ usuarios|length }}</b> de {{ usuarios|length }} usuarios</div>
+    </div>
+    <div class="twrap">
+        <table class="tbl">
+            <thead><tr><th style="width:70px">ID</th><th>Empleado</th><th>Rol</th><th>Usuario</th><th>Estado</th><th style="text-align:right">Acciones</th></tr></thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td class="mono">{{ usuario.id_usuario }}</td>
+                    <td>{{ usuario.empleado.nombres }}</td>
+                    <td><span class="tag">{{ usuario.rol.nombre_rol }}</span></td>
+                    <td><b style="font-weight:500">{{ usuario.usuario }}</b></td>
+                    <td><span class="pill {{ 'on' if usuario.estado == 'Activo' else 'off' }}">{{ usuario.estado }}</span></td>
+                    <td>
+                        <div class="acts">
+                            <a href="{{ url_for('main.editar_usuario', id=usuario.id_usuario) }}" class="iact edit" title="Editar" aria-label="Editar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></a>
+                            <a href="{{ url_for('main.eliminar_usuario', id=usuario.id_usuario) }}" class="iact del js-del" title="Eliminar" aria-label="Eliminar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="js-empty">No se encontraron usuarios.</div>
+    </div>
+</section>
 
 {% endblock %}

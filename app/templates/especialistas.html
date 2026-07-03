@@ -1,104 +1,76 @@
 {% extends "base.html" %}
 
+{% block titulo %}Especialistas{% endblock %}
+{% block crumb %}Servicios Médicos · <b>Especialistas</b>{% endblock %}
+{% block encabezado %}Módulo de Especialistas{% endblock %}
+
 {% block contenido %}
 
-<h2>Módulo de Especialistas</h2>
+<section class="card">
+    <div class="card-h">
+        <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 3v18M3 12h18"/></svg></div>
+        <div><h2>Registrar especialista</h2><p>Asigna a un empleado una especialización y su horario</p></div>
+    </div>
+    <form class="form" action="/especialistas/nuevo" method="POST">
+        <div class="field span2"><label>Empleado</label>
+            <select name="empleado">
+                {% for empleado in empleados %}
+                <option value="{{ empleado.id_empleado }}">{{ empleado.nombres }} {{ empleado.apellidos }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field"><label>Especialización</label>
+            <select name="especializacion">
+                {% for especializacion in especializaciones %}
+                <option value="{{ especializacion.id_especializacion }}">{{ especializacion.nombre_especializacion }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field"><label>Hora inicio</label><input type="time" name="hora_inicio"></div>
+        <div class="field"><label>Hora fin</label><input type="time" name="hora_fin"></div>
+        <div class="field"><label>Días disponibles</label><input type="text" name="dias_disponibles" placeholder="Lun a Vie"></div>
+        <div class="form-foot">
+            <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>Guardar especialista</button>
+        </div>
+    </form>
+</section>
 
-<h3>Registrar Especialista</h3>
-
-<form action="/especialistas/nuevo" method="POST">
-
-    <label>Empleado:</label><br>
-
-    <select name="empleado">
-        {% for empleado in empleados %}
-        <option value="{{ empleado.id_empleado }}">
-            {{ empleado.nombres }} {{ empleado.apellidos }}
-        </option>
-        {% endfor %}
-    </select>
-
-    <br><br>
-
-    <label>Especialización:</label><br>
-
-    <select name="especializacion">
-        {% for especializacion in especializaciones %}
-        <option value="{{ especializacion.id_especializacion }}">
-            {{ especializacion.nombre_especializacion }}
-        </option>
-        {% endfor %}
-    </select>
-
-    <br><br>
-
-    <label>Hora Inicio:</label><br>
-    <input type="time" name="hora_inicio">
-
-    <br><br>
-
-    <label>Hora Fin:</label><br>
-    <input type="time" name="hora_fin">
-
-    <br><br>
-
-    <label>Días Disponibles:</label><br>
-    <input type="text" name="dias_disponibles">
-
-    <br><br>
-
-    <button type="submit">
-        Guardar Especialista
-    </button>
-
-</form>
-
-<br>
-
-<table border="1" cellpadding="10">
-
-    <tr>
-        <th>Empleado</th>
-        <th>Especialización</th>
-        <th>Hora Inicio</th>
-        <th>Hora Fin</th>
-        <th>Días</th>
-        <th>Acciones</th>
-    </tr>
-
-    {% for especialista in especialistas %}
-
-    <tr>
-
-        <td>
-            {{ especialista.empleado.nombres }}
-            {{ especialista.empleado.apellidos }}
-        </td>
-
-        <td>
-            {{ especialista.especializacion.nombre_especializacion }}
-        </td>
-
-        <td>{{ especialista.hora_inicio }}</td>
-
-        <td>{{ especialista.hora_fin }}</td>
-
-        <td>{{ especialista.dias_disponibles }}</td>
-
-        <td>
-        <a href="/especialistas/editar/{{ especialista.id_empleado }}">
-            Editar
-        </a>
-
-        <a href="/especialistas/eliminar/{{ especialista.id_empleado }}">
-            Eliminar
-        </a>
-        </td>
-
-    </tr>
-
-    {% endfor %}
-
-</table>
+<section class="card">
+    <div class="tbar">
+        <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input class="js-search" placeholder="Buscar por especialista o especialización…">
+        </div>
+        <div class="count"><b class="js-count">{{ especialistas|length }}</b> de {{ especialistas|length }} especialistas</div>
+    </div>
+    <div class="twrap">
+        <table class="tbl">
+            <thead><tr><th>Especialista</th><th>Especialización</th><th>Hora inicio</th><th>Hora fin</th><th>Días</th><th style="text-align:right">Acciones</th></tr></thead>
+            <tbody>
+                {% for especialista in especialistas %}
+                <tr>
+                    <td>
+                        <div class="emp">
+                            <div class="ini {{ ['ini-navy','ini-blue','ini-blue6'][loop.index0 % 3] }}">{{ (especialista.empleado.nombres or '?')[0] }}{{ (especialista.empleado.apellidos or '')[0] }}</div>
+                            <div><b>{{ especialista.empleado.nombres }} {{ especialista.empleado.apellidos }}</b></div>
+                        </div>
+                    </td>
+                    <td><span class="tag">{{ especialista.especializacion.nombre_especializacion }}</span></td>
+                    <td class="mono">{{ especialista.hora_inicio }}</td>
+                    <td class="mono">{{ especialista.hora_fin }}</td>
+                    <td class="muted">{{ especialista.dias_disponibles }}</td>
+                    <td>
+                        <div class="acts">
+                            <a href="/especialistas/editar/{{ especialista.id_empleado }}" class="iact edit" title="Editar" aria-label="Editar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></a>
+                            <a href="/especialistas/eliminar/{{ especialista.id_empleado }}" class="iact del js-del" title="Eliminar" aria-label="Eliminar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="js-empty">No se encontraron especialistas.</div>
+    </div>
+</section>
 
 {% endblock %}

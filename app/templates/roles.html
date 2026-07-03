@@ -1,63 +1,54 @@
 {% extends "base.html" %}
 
+{% block titulo %}Roles{% endblock %}
+{% block crumb %}Seguridad · <b>Roles</b>{% endblock %}
+{% block encabezado %}Módulo de Roles{% endblock %}
+
 {% block contenido %}
 
-<h2>Módulo de Roles</h2>
+<section class="card">
+    <div class="card-h">
+        <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg></div>
+        <div><h2>Registrar rol</h2><p>Define un rol de acceso del sistema</p></div>
+    </div>
+    <form class="form cols-2" action="/roles/nuevo" method="POST">
+        <div class="field"><label>Nombre del rol</label><input type="text" name="nombre_rol" placeholder="Administrador"></div>
+        <div class="field"><label>Descripción</label><input type="text" name="descripcion" placeholder="Acceso total al sistema"></div>
+        <div class="form-foot">
+            <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>Guardar rol</button>
+        </div>
+    </form>
+</section>
 
-<h3>Registrar Rol</h3>
-
-<form action="/roles/nuevo" method="POST">
-
-    <label>Nombre del Rol:</label><br>
-    <input type="text" name="nombre_rol">
-
-    <br><br>
-
-    <label>Descripción:</label><br>
-    <input type="text" name="descripcion">
-
-    <br><br>
-
-    <button type="submit">
-        Guardar Rol
-    </button>
-
-</form>
-
-<br>
-
-<table border="1" cellpadding="10">
-
-    <tr>
-        <th>ID</th>
-        <th>Rol</th>
-        <th>Descripción</th>
-        <th>Acciones</th>
-    </tr>
-
-    {% for rol in roles %}
-
-    <tr>
-        <td>{{ rol.id_rol }}</td>
-        <td>{{ rol.nombre_rol }}</td>
-        <td>{{ rol.descripcion }}</td>
-
-        <td>
-            <a href="/roles/editar/{{ rol.id_rol }}">
-                Editar
-            </a>
-
-            |
-
-            <a href="/roles/eliminar/{{ rol.id_rol }}">
-                Eliminar
-            </a>
-        </td>
-
-    </tr>
-
-    {% endfor %}
-
-</table>
+<section class="card">
+    <div class="tbar">
+        <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input class="js-search" placeholder="Buscar rol…">
+        </div>
+        <div class="count"><b class="js-count">{{ roles|length }}</b> de {{ roles|length }} roles</div>
+    </div>
+    <div class="twrap">
+        <table class="tbl">
+            <thead><tr><th style="width:90px">ID</th><th>Rol</th><th>Descripción</th><th style="text-align:right">Acciones</th></tr></thead>
+            <tbody>
+                {% for rol in roles %}
+                <tr>
+                    <td class="mono">{{ rol.id_rol }}</td>
+                    <td><span class="tag">{{ rol.nombre_rol }}</span></td>
+                    <td class="muted">{{ rol.descripcion }}</td>
+                    <td>
+                        <div class="acts">
+                            <a href="/roles/editar/{{ rol.id_rol }}" class="iact edit" title="Editar" aria-label="Editar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></a>
+                            <a href="/roles/eliminar/{{ rol.id_rol }}" class="iact del js-del" title="Eliminar" aria-label="Eliminar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="js-empty">No se encontraron roles.</div>
+    </div>
+</section>
 
 {% endblock %}

@@ -1,0 +1,269 @@
+/* ============================================================
+   SENAMECF · Sistema de diseño institucional
+   Paleta derivada del logo: azul marino, azul institucional,
+   blanco y cinta tricolor (amarillo / azul / rojo).
+   Solo estilos — no altera la funcionalidad del sistema.
+   ============================================================ */
+
+:root{
+  --navy:#0D2C54;
+  --navy-700:#12355B;
+  --blue:#1B4F91;
+  --blue-600:#2E6BB8;
+  --yellow:#FFCC00;
+  --red:#CF142B;
+  --red-tint:#FBE7E9;
+  --green:#1E8E5A;
+  --green-tint:#E4F3EC;
+  --amber:#B8860B;
+  --amber-tint:#FBF0D8;
+  --page:#F5F7FA;
+  --card:#FFFFFF;
+  --border:#E3E8EF;
+  --border-strong:#CBD5E1;
+  --ink:#16273D;
+  --ink-2:#5A6B7B;
+  --ink-3:#8A99A8;
+  --radius:12px;
+  --radius-sm:9px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--page);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:14px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------------- Layout general ---------------- */
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+
+/* ---------------- Barra lateral ---------------- */
+.side{background:var(--navy);color:#fff;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:12px;padding:22px 20px 20px}
+.mark{width:44px;height:44px;border-radius:10px;background:var(--navy-700);border:2px solid rgba(255,255,255,.9);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;position:relative}
+.mark svg{width:26px;height:26px}
+.mark .ribbon{position:absolute;bottom:0;left:0;right:0;height:6px;display:flex}
+.mark .ribbon i{flex:1}
+.brand-txt b{font-size:16px;letter-spacing:.06em;display:block;line-height:1}
+.brand-txt span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+.nav{padding:8px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.nav-label{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:16px 12px 8px}
+.nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:9px;color:rgba(255,255,255,.78);
+       text-decoration:none;font-size:14px;font-weight:450;position:relative;transition:background .15s,color .15s}
+.nav a svg{width:18px;height:18px;flex-shrink:0;stroke:currentColor}
+.nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav a.active{background:var(--blue);color:#fff;font-weight:500}
+.nav a.active::before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:4px;border-radius:0 4px 4px 0;background:var(--yellow)}
+.side-foot{margin-top:auto;padding:16px 20px;border-top:1px solid rgba(255,255,255,.1);font-size:11.5px;color:rgba(255,255,255,.5)}
+
+/* ---------------- Barra superior ---------------- */
+.main{display:flex;flex-direction:column;min-width:0}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 32px;
+     background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5}
+.crumb{font-size:12.5px;color:var(--ink-3);letter-spacing:.02em}
+.crumb b{color:var(--ink);font-weight:500}
+.top h1{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:2px 0 0}
+.user{display:flex;align-items:center;gap:10px}
+.user .who{text-align:right;line-height:1.25}
+.user .who b{font-size:13px;font-weight:500;display:block}
+.user .who span{font-size:11.5px;color:var(--ink-2)}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;display:flex;
+        align-items:center;justify-content:center;font-weight:600;font-size:14px;flex-shrink:0}
+.logout{margin-left:6px;width:38px;height:38px;border-radius:9px;border:1px solid var(--border);background:#fff;
+        display:flex;align-items:center;justify-content:center;color:var(--ink-2);transition:all .15s}
+.logout svg{width:17px;height:17px;stroke:currentColor}
+.logout:hover{border-color:var(--red);color:var(--red);background:var(--red-tint)}
+
+/* ---------------- Contenido ---------------- */
+.content{padding:26px 32px 48px;display:flex;flex-direction:column;gap:22px;width:100%;flex:1 1 auto}
+
+/* Tarjetas de resumen */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;
+      display:flex;flex-direction:column;gap:10px}
+.stat .row{display:flex;align-items:center;justify-content:space-between}
+.stat .ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+.stat .ico svg{width:19px;height:19px;stroke:currentColor}
+.stat .num{font-size:27px;font-weight:600;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .lbl{font-size:12.5px;color:var(--ink-2)}
+.i-blue{background:#E7F0FA;color:var(--blue)}
+.i-navy{background:#E4E9F1;color:var(--navy)}
+.i-yellow{background:#FFF4CC;color:#8A6D00}
+.i-green{background:var(--green-tint);color:var(--green)}
+.i-red{background:var(--red-tint);color:var(--red)}
+
+/* ---------------- Tarjeta base ---------------- */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.card-h{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border)}
+.card-h .hi{width:34px;height:34px;border-radius:9px;background:#E7F0FA;color:var(--blue);
+            display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card-h .hi svg{width:18px;height:18px;stroke:currentColor}
+.card-h h2{font-size:15px;font-weight:600;margin:0}
+.card-h p{font-size:12.5px;color:var(--ink-2);margin:1px 0 0}
+
+/* ---------------- Formularios ---------------- */
+.form{padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 18px}
+.form.cols-2{grid-template-columns:repeat(2,1fr)}
+.form.cols-1{grid-template-columns:1fr;max-width:520px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.span2{grid-column:span 2}
+.field.span3{grid-column:1/-1}
+.field label{font-size:12px;font-weight:500;color:var(--ink-2);letter-spacing:.01em}
+.field label .req{color:var(--red)}
+.field input,.field select{height:40px;border:1px solid var(--border-strong);border-radius:9px;padding:0 12px;font-size:14px;
+             font-family:inherit;color:var(--ink);background:#fff;transition:border .15s,box-shadow .15s;width:100%}
+.field select{appearance:none;-webkit-appearance:none;cursor:pointer;
+   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6B7B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+   background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+.field input::placeholder{color:var(--ink-3)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,79,145,.14)}
+.form-foot{grid-column:1/-1;display:flex;justify-content:flex-end;gap:10px;padding-top:2px}
+
+/* ---------------- Botones ---------------- */
+.btn{height:40px;padding:0 18px;border-radius:9px;font-size:13.5px;font-weight:500;font-family:inherit;
+     border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+     transition:background .15s,border .15s,color .15s;text-decoration:none}
+.btn svg{width:16px;height:16px;stroke:currentColor}
+.btn-ghost{background:#fff;border-color:var(--border-strong);color:var(--ink-2)}
+.btn-ghost:hover{background:var(--page);color:var(--ink)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--navy)}
+
+/* ---------------- Barra de tabla ---------------- */
+.tbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.search{position:relative;flex:1;max-width:360px;min-width:200px}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--ink-3)}
+.search input{width:100%;height:38px;border:1px solid var(--border-strong);border-radius:9px;padding:0 12px 0 36px;
+              font-size:13.5px;font-family:inherit;background:#fff}
+.search input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,79,145,.14)}
+.count{font-size:12.5px;color:var(--ink-2)}
+.count b{color:var(--ink);font-weight:600}
+
+/* ---------------- Tabla ---------------- */
+.twrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+table.tbl thead th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+         font-weight:600;padding:12px 20px;background:#FAFBFD;border-bottom:1px solid var(--border);white-space:nowrap}
+table.tbl tbody td{padding:13px 20px;border-bottom:1px solid var(--border);vertical-align:middle}
+table.tbl tbody tr:last-child td{border-bottom:none}
+table.tbl tbody tr{transition:background .12s}
+table.tbl tbody tr:hover{background:#F8FAFD}
+.emp{display:flex;align-items:center;gap:11px}
+.emp .ini{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+          font-size:12.5px;font-weight:600;color:#fff;flex-shrink:0;text-transform:uppercase}
+.emp b{font-weight:500;font-size:13.5px}
+.emp span{display:block;font-size:11.5px;color:var(--ink-3)}
+.mono{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.ini-navy{background:var(--navy)}
+.ini-blue{background:var(--blue)}
+.ini-blue6{background:var(--blue-600)}
+
+/* Chips de estado */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:500;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%}
+.pill.on{background:var(--green-tint);color:var(--green)}
+.pill.on::before{background:var(--green)}
+.pill.off{background:#EEF1F5;color:var(--ink-2)}
+.pill.off::before{background:var(--ink-3)}
+.pill.warn{background:var(--amber-tint);color:var(--amber)}
+.pill.warn::before{background:var(--amber)}
+.pill.bad{background:var(--red-tint);color:var(--red)}
+.pill.bad::before{background:var(--red)}
+
+/* Acciones de fila */
+.acts{display:flex;gap:6px;justify-content:flex-end}
+.iact{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:#fff;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;color:var(--ink-2);transition:all .15s;text-decoration:none}
+.iact svg{width:15px;height:15px;stroke:currentColor}
+.iact.edit:hover{border-color:var(--blue);color:var(--blue);background:#E7F0FA}
+.iact.del:hover{border-color:var(--red);color:var(--red);background:var(--red-tint)}
+
+.js-empty{padding:40px;text-align:center;color:var(--ink-3);font-size:13.5px;display:none}
+.tag{display:inline-block;font-size:12px;font-weight:500;color:var(--blue);background:#E7F0FA;padding:3px 10px;border-radius:6px}
+.muted{color:var(--ink-2)}
+
+/* ---------------- Login ---------------- */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+            background:linear-gradient(160deg,var(--navy) 0%,var(--navy-700) 55%,var(--blue) 100%)}
+.login-card{background:#fff;width:400px;max-width:100%;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(6,20,45,.35)}
+.login-head{background:var(--navy);color:#fff;padding:30px 32px 26px;text-align:center;position:relative}
+.login-head .ribbon{position:absolute;bottom:0;left:0;right:0;height:5px;display:flex}
+.login-head .ribbon i{flex:1}
+.login-mark{width:66px;height:66px;border-radius:16px;background:var(--navy-700);border:2.5px solid rgba(255,255,255,.9);
+            margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
+.login-mark svg{width:38px;height:38px;stroke:#fff}
+.login-head h1{font-size:22px;letter-spacing:.08em;margin:0}
+.login-head p{font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.7);margin:4px 0 0;text-transform:uppercase}
+.login-body{padding:28px 32px 32px}
+.login-body h2{font-size:16px;font-weight:600;margin:0 0 4px}
+.login-body .sub{font-size:12.5px;color:var(--ink-2);margin:0 0 20px}
+.login-field{margin-bottom:16px}
+.login-field label{display:block;font-size:12px;font-weight:500;color:var(--ink-2);margin-bottom:6px}
+.login-field input{width:100%;height:44px;border:1px solid var(--border-strong);border-radius:10px;padding:0 14px;
+                   font-size:14px;font-family:inherit;color:var(--ink)}
+.login-field input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,79,145,.14)}
+.login-btn{width:100%;height:46px;border:none;border-radius:10px;background:var(--blue);color:#fff;font-size:14.5px;
+           font-weight:500;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;
+           gap:8px;transition:background .15s;margin-top:4px}
+.login-btn svg{width:17px;height:17px;stroke:currentColor}
+.login-btn:hover{background:var(--navy)}
+.login-foot{text-align:center;font-size:11.5px;color:var(--ink-3);margin-top:18px}
+
+/* ---------------- Lanzador de módulos (dashboard) ---------------- */
+.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.modcard{display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);
+         border-radius:12px;padding:18px;text-decoration:none;color:inherit;transition:border .15s,box-shadow .15s,transform .15s}
+.modcard:hover{border-color:var(--blue);box-shadow:0 8px 22px rgba(13,44,84,.10);transform:translateY(-2px)}
+.modcard .mi{width:42px;height:42px;border-radius:10px;background:#E7F0FA;color:var(--blue);flex-shrink:0;
+             display:flex;align-items:center;justify-content:center}
+.modcard .mi svg{width:21px;height:21px;stroke:currentColor}
+.modcard .mt{flex:1;min-width:0}
+.modcard .mt b{display:block;font-size:14.5px;font-weight:600}
+.modcard .mt span{display:block;font-size:12.5px;color:var(--ink-2);margin-top:2px;line-height:1.4}
+.modcard .marrow{color:var(--ink-3);align-self:center;flex-shrink:0}
+.modcard .marrow svg{width:18px;height:18px;stroke:currentColor}
+.modcard:hover .marrow{color:var(--blue)}
+
+/* Panel institucional (hero del dashboard) */
+.hero{background:var(--navy);color:#fff;border-radius:var(--radius);padding:22px 24px;display:flex;
+      align-items:center;gap:18px;position:relative;overflow:hidden}
+.hero .hmark{width:52px;height:52px;border-radius:12px;background:var(--navy-700);border:2px solid rgba(255,255,255,.85);
+             display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero .hmark svg{width:30px;height:30px;stroke:#fff}
+.hero h2{font-size:18px;font-weight:600;margin:0}
+.hero p{font-size:13px;color:rgba(255,255,255,.72);margin:3px 0 0}
+.hero .hribbon{position:absolute;left:0;right:0;bottom:0;height:5px;display:flex}
+.hero .hribbon i{flex:1}
+.section-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin:2px 0 -6px}
+
+/* ---------------- Navegación superior (pantallas angostas) ---------------- */
+.topnav{display:none}
+
+/* ---------------- Responsivo ---------------- */
+@media(max-width:960px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .topnav{display:flex;gap:4px;overflow-x:auto;padding:10px 16px;background:var(--navy);
+          position:sticky;top:0;z-index:4;-webkit-overflow-scrolling:touch}
+  .topnav a{white-space:nowrap;color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:500;
+            padding:7px 13px;border-radius:8px;transition:background .15s,color .15s}
+  .topnav a:hover{background:rgba(255,255,255,.1);color:#fff}
+  .topnav a.active{background:var(--blue);color:#fff}
+  .content{padding:20px 16px 40px}
+  .top{padding:14px 18px}
+  .top h1{font-size:17px}
+}
+@media(max-width:560px){
+  .user .who{display:none}
+  .top{padding:12px 14px}
+  .form.cols-2{grid-template-columns:1fr}
+  .tbar{gap:10px}
+  .search{max-width:none}
+}

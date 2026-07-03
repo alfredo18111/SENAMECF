@@ -1,28 +1,27 @@
 {% extends "base.html" %}
 
+{% block titulo %}Editar empleado{% endblock %}
+{% block crumb %}Talento Humano · Empleados · <b>Editar</b>{% endblock %}
+{% block encabezado %}Editar empleado{% endblock %}
+
 {% block contenido %}
 
-<h2>Editar Empleado</h2>
-
-<form method="POST">
-
-    <label>Cédula:</label><br>
-    <input type="text" name="cedula" value="{{ empleado.cedula }}"><br><br>
-
-    <label>Nombres:</label><br>
-    <input type="text" name="nombres" value="{{ empleado.nombres }}"><br><br>
-
-    <label>Apellidos:</label><br>
-    <input type="text" name="apellidos" value="{{ empleado.apellidos }}"><br><br>
-
-    <label>Teléfono:</label><br>
-    <input type="text" name="telefono" value="{{ empleado.telefono }}"><br><br>
-
-    <label>Correo:</label><br>
-    <input type="email" name="correo" value="{{ empleado.correo }}"><br><br>
-
-    <button type="submit">Guardar Cambios</button>
-
-</form>
+<section class="card" style="max-width:620px">
+    <div class="card-h">
+        <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></div>
+        <div><h2>{{ empleado.nombres }} {{ empleado.apellidos }}</h2><p>Actualiza los datos del empleado</p></div>
+    </div>
+    <form class="form cols-2" method="POST">
+        <div class="field"><label>Cédula</label><input type="text" name="cedula" value="{{ empleado.cedula }}"></div>
+        <div class="field"><label>Nombres</label><input type="text" name="nombres" value="{{ empleado.nombres }}"></div>
+        <div class="field"><label>Apellidos</label><input type="text" name="apellidos" value="{{ empleado.apellidos }}"></div>
+        <div class="field"><label>Teléfono</label><input type="text" name="telefono" value="{{ empleado.telefono }}"></div>
+        <div class="field span2"><label>Correo</label><input type="email" name="correo" value="{{ empleado.correo }}"></div>
+        <div class="form-foot">
+            <a href="/empleados" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Cancelar</a>
+            <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Guardar cambios</button>
+        </div>
+    </form>
+</section>
 
 {% endblock %}

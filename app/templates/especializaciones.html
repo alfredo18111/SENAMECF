@@ -1,59 +1,52 @@
 {% extends "base.html" %}
 
+{% block titulo %}Especializaciones{% endblock %}
+{% block crumb %}Servicios Médicos · <b>Especializaciones</b>{% endblock %}
+{% block encabezado %}Módulo de Especializaciones{% endblock %}
+
 {% block contenido %}
 
-<h2>Módulo de Especializaciones</h2>
+<section class="card">
+    <div class="card-h">
+        <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v4"/><path d="M8 7a4 4 0 004 4 4 4 0 004-4"/><path d="M12 11v5a3 3 0 006 0v-1"/><circle cx="18" cy="15" r="1.4"/></svg></div>
+        <div><h2>Registrar especialización</h2><p>Añade una nueva área médica</p></div>
+    </div>
+    <form class="form cols-1" action="/especializaciones/nuevo" method="POST">
+        <div class="field"><label>Nombre</label><input type="text" name="nombre" required placeholder="Cardiología"></div>
+        <div class="form-foot">
+            <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>Guardar especialización</button>
+        </div>
+    </form>
+</section>
 
-<h3>Registrar Especialización</h3>
-
-<form action="/especializaciones/nuevo" method="POST">
-
-    <label>Nombre:</label><br>
-    <input type="text" name="nombre" required>
-
-    <br><br>
-
-    <button type="submit">
-        Guardar Especialización
-    </button>
-
-</form>
-
-<br>
-
-<table border="1" cellpadding="10">
-
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Acciones</th>
-    </tr>
-
-    {% for especializacion in especializaciones %}
-
-
-    <tr>
-        <td>{{ especializacion.id_especializacion }}</td>
-        <td>{{ especializacion.nombre_especializacion }}</td>
-
-        <td style="text-align:center;">
-
-    <a href="/especializaciones/editar/{{ especializacion.id_especializacion }}">
-        Editar
-    </a>
-
-    |
-
-    <a href="/especializaciones/eliminar/{{ especializacion.id_especializacion }}">
-        Eliminar
-    </a>
-
-</td>
-
-    </tr>
-
-    {% endfor %}
-
-</table>
+<section class="card">
+    <div class="tbar">
+        <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input class="js-search" placeholder="Buscar especialización…">
+        </div>
+        <div class="count"><b class="js-count">{{ especializaciones|length }}</b> de {{ especializaciones|length }} especializaciones</div>
+    </div>
+    <div class="twrap">
+        <table class="tbl">
+            <thead><tr><th style="width:90px">ID</th><th>Nombre</th><th style="text-align:right">Acciones</th></tr></thead>
+            <tbody>
+                {% for especializacion in especializaciones %}
+                <tr>
+                    <td class="mono">{{ especializacion.id_especializacion }}</td>
+                    <td><b style="font-weight:500">{{ especializacion.nombre_especializacion }}</b></td>
+                    <td>
+                        <div class="acts">
+                            <a href="/especializaciones/editar/{{ especializacion.id_especializacion }}" class="iact edit" title="Editar" aria-label="Editar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></a>
+                            <a href="/especializaciones/eliminar/{{ especializacion.id_especializacion }}" class="iact del js-del" title="Eliminar" aria-label="Eliminar"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="js-empty">No se encontraron especializaciones.</div>
+    </div>
+</section>
 
 {% endblock %}
