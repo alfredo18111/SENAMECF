@@ -104,6 +104,48 @@
         var link = e.target.closest('a.js-del');
         if(link && !confirm('¿Eliminar este registro? Esta acción no se puede deshacer.')) e.preventDefault();
     });
+
+    /* Combo buscable: escribir filtra las opciones; el id viaja en un input oculto. */
+    document.querySelectorAll('.combo').forEach(function(combo){
+        var input = combo.querySelector('.combo-input');
+        var hidden = combo.querySelector('.combo-value');
+        var opts = Array.prototype.slice.call(combo.querySelectorAll('.combo-opt'));
+
+        function elegir(opt){
+            if(!opt) return;
+            hidden.value = opt.getAttribute('data-value');
+            input.value = opt.textContent.trim();
+            combo.setAttribute('data-text', input.value);
+        }
+        if(opts.length) elegir(opts[0]);           // por defecto, la primera (igual que el select nativo)
+
+        function mostrarTodas(){ opts.forEach(function(o){o.classList.remove('hide','active')}); combo.classList.remove('noresults'); }
+        function filtrar(){
+            var q = input.value.toLowerCase().trim(), n = 0;
+            opts.forEach(function(o){
+                var hit = o.textContent.toLowerCase().indexOf(q) > -1;
+                o.classList.toggle('hide', !hit); o.classList.remove('active');
+                if(hit) n++;
+            });
+            combo.classList.toggle('noresults', n === 0);
+        }
+        function activar(o){ opts.forEach(function(x){x.classList.remove('active')}); if(o){o.classList.add('active'); o.scrollIntoView({block:'nearest'});} }
+
+        input.addEventListener('focus', function(){ input.select(); mostrarTodas(); combo.classList.add('open'); });
+        input.addEventListener('input', function(){ combo.classList.add('open'); filtrar(); });
+        input.addEventListener('blur', function(){
+            setTimeout(function(){ combo.classList.remove('open'); input.value = combo.getAttribute('data-text') || ''; }, 150);
+        });
+        opts.forEach(function(o){ o.addEventListener('mousedown', function(e){ e.preventDefault(); elegir(o); combo.classList.remove('open'); }); });
+        input.addEventListener('keydown', function(e){
+            var vis = opts.filter(function(o){return !o.classList.contains('hide')});
+            var cur = combo.querySelector('.combo-opt.active'), idx = vis.indexOf(cur);
+            if(e.key === 'ArrowDown'){ e.preventDefault(); combo.classList.add('open'); activar(vis[Math.min(idx+1, vis.length-1)] || vis[0]); }
+            else if(e.key === 'ArrowUp'){ e.preventDefault(); activar(vis[Math.max(idx-1, 0)] || vis[0]); }
+            else if(e.key === 'Enter' && combo.classList.contains('open')){ e.preventDefault(); elegir(cur || vis[0]); combo.classList.remove('open'); }
+            else if(e.key === 'Escape'){ combo.classList.remove('open'); input.value = combo.getAttribute('data-text') || ''; input.blur(); }
+        });
+    });
 </script>
 
 </body>

@@ -6,25 +6,35 @@
 
 {% block contenido %}
 
-<section class="card">
+<section class="card allow-overflow">
     <div class="card-h">
         <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div>
         <div><h2>Registrar usuario</h2><p>Crea una cuenta de acceso vinculada a un empleado</p></div>
     </div>
     <form class="form" action="{{ url_for('main.nuevo_usuario') }}" method="POST">
         <div class="field"><label>Empleado</label>
-            <select name="id_empleado">
-                {% for empleado in empleados %}
-                <option value="{{ empleado.id_empleado }}">{{ empleado.nombres }} {{ empleado.apellidos }}</option>
-                {% endfor %}
-            </select>
+            <div class="combo">
+                <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
+                <input type="hidden" name="id_empleado" class="combo-value">
+                <div class="combo-list">
+                    {% for empleado in empleados %}
+                    <div class="combo-opt" data-value="{{ empleado.id_empleado }}">{{ empleado.nombres }} {{ empleado.apellidos }}</div>
+                    {% endfor %}
+                    <div class="combo-empty">Sin resultados</div>
+                </div>
+            </div>
         </div>
         <div class="field"><label>Rol</label>
-            <select name="id_rol">
-                {% for rol in roles %}
-                <option value="{{ rol.id_rol }}">{{ rol.nombre_rol }}</option>
-                {% endfor %}
-            </select>
+            <div class="combo">
+                <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
+                <input type="hidden" name="id_rol" class="combo-value">
+                <div class="combo-list">
+                    {% for rol in roles %}
+                    <div class="combo-opt" data-value="{{ rol.id_rol }}">{{ rol.nombre_rol }}</div>
+                    {% endfor %}
+                    <div class="combo-empty">Sin resultados</div>
+                </div>
+            </div>
         </div>
         <div class="field"><label>Estado</label>
             <select name="estado">

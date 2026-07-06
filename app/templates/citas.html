@@ -6,25 +6,35 @@
 
 {% block contenido %}
 
-<section class="card">
+<section class="card allow-overflow">
     <div class="card-h">
         <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18"/><path d="M8 2v4M16 2v4"/></svg></div>
         <div><h2>Registrar cita</h2><p>Agenda una cita entre un empleado y un especialista</p></div>
     </div>
     <form class="form" method="POST" action="{{ url_for('main.nueva_cita') }}">
         <div class="field"><label>Empleado</label>
-            <select name="id_empleado">
-                {% for empleado in empleados %}
-                <option value="{{ empleado.id_empleado }}">{{ empleado.nombres }}</option>
-                {% endfor %}
-            </select>
+            <div class="combo">
+                <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
+                <input type="hidden" name="id_empleado" class="combo-value">
+                <div class="combo-list">
+                    {% for empleado in empleados %}
+                    <div class="combo-opt" data-value="{{ empleado.id_empleado }}">{{ empleado.nombres }}</div>
+                    {% endfor %}
+                    <div class="combo-empty">Sin resultados</div>
+                </div>
+            </div>
         </div>
         <div class="field span2"><label>Especialista</label>
-            <select name="id_empleado_especialista">
-                {% for especialista in especialistas %}
-                <option value="{{ especialista.id_empleado }}">{{ especialista.empleado.nombres }} {{ especialista.empleado.apellidos }} - {{ especialista.especializacion.nombre_especializacion }}</option>
-                {% endfor %}
-            </select>
+            <div class="combo">
+                <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
+                <input type="hidden" name="id_empleado_especialista" class="combo-value">
+                <div class="combo-list">
+                    {% for especialista in especialistas %}
+                    <div class="combo-opt" data-value="{{ especialista.id_empleado }}">{{ especialista.empleado.nombres }} {{ especialista.empleado.apellidos }} - {{ especialista.especializacion.nombre_especializacion }}</div>
+                    {% endfor %}
+                    <div class="combo-empty">Sin resultados</div>
+                </div>
+            </div>
         </div>
         <div class="field"><label>Fecha</label><input type="date" name="fecha_cita"></div>
         <div class="field"><label>Hora</label><input type="time" name="hora_cita"></div>

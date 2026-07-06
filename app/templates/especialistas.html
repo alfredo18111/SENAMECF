@@ -6,25 +6,35 @@
 
 {% block contenido %}
 
-<section class="card">
+<section class="card allow-overflow">
     <div class="card-h">
         <div class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 3v18M3 12h18"/></svg></div>
         <div><h2>Registrar especialista</h2><p>Asigna a un empleado una especialización y su horario</p></div>
     </div>
     <form class="form" action="/especialistas/nuevo" method="POST">
-        <div class="field span2"><label>Empleado</label>
-            <select name="empleado">
-                {% for empleado in empleados %}
-                <option value="{{ empleado.id_empleado }}">{{ empleado.nombres }} {{ empleado.apellidos }}</option>
-                {% endfor %}
-            </select>
+        <div class="field span2"><label>Especialista</label>
+            <div class="combo">
+                <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
+                <input type="hidden" name="empleado" class="combo-value">
+                <div class="combo-list">
+                    {% for empleado in empleados %}
+                    <div class="combo-opt" data-value="{{ empleado.id_empleado }}">{{ empleado.nombres }} {{ empleado.apellidos }}</div>
+                    {% endfor %}
+                    <div class="combo-empty">Sin resultados</div>
+                </div>
+            </div>
         </div>
         <div class="field"><label>Especialización</label>
-            <select name="especializacion">
-                {% for especializacion in especializaciones %}
-                <option value="{{ especializacion.id_especializacion }}">{{ especializacion.nombre_especializacion }}</option>
-                {% endfor %}
-            </select>
+            <div class="combo">
+                <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
+                <input type="hidden" name="especializacion" class="combo-value">
+                <div class="combo-list">
+                    {% for especializacion in especializaciones %}
+                    <div class="combo-opt" data-value="{{ especializacion.id_especializacion }}">{{ especializacion.nombre_especializacion }}</div>
+                    {% endfor %}
+                    <div class="combo-empty">Sin resultados</div>
+                </div>
+            </div>
         </div>
         <div class="field"><label>Hora inicio</label><input type="time" name="hora_inicio"></div>
         <div class="field"><label>Hora fin</label><input type="time" name="hora_fin"></div>
