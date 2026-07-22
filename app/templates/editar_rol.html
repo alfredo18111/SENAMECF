@@ -12,8 +12,8 @@
         <div><h2>{{ rol.nombre_rol }}</h2><p>Actualiza el rol y su descripción</p></div>
     </div>
     <form class="form cols-2" method="POST">
-        <div class="field"><label>Nombre del rol</label><input type="text" name="nombre_rol" value="{{ rol.nombre_rol }}"></div>
-        <div class="field"><label>Descripción</label><input type="text" name="descripcion" value="{{ rol.descripcion }}"></div>
+        <div class="field"><label>Nombre del rol <span class="req">*</span></label><input type="text" name="nombre_rol" value="{{ rol.nombre_rol }}" data-required></div>
+        <div class="field"><label>Descripción <span class="req">*</span></label><input type="text" name="descripcion" value="{{ rol.descripcion }}" data-required></div>
         <div class="form-foot">
             <a href="/roles" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Cancelar</a>
             <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Guardar cambios</button>

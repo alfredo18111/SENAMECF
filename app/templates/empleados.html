@@ -12,11 +12,11 @@
         <div><h2>Registrar empleado</h2><p>Completa los datos del nuevo miembro del personal</p></div>
     </div>
     <form class="form" method="POST" action="/empleados/nuevo">
-        <div class="field"><label>Cédula</label><input type="text" name="cedula" placeholder="V-12.345.678"></div>
-        <div class="field"><label>Nombres</label><input type="text" name="nombres" placeholder="María Gabriela"></div>
-        <div class="field"><label>Apellidos</label><input type="text" name="apellidos" placeholder="Rodríguez Peña"></div>
-        <div class="field"><label>Teléfono</label><input type="text" name="telefono" placeholder="0412-555-0134"></div>
-        <div class="field span2"><label>Correo electrónico</label><input type="email" name="correo" placeholder="nombre@senamecf.gob.ve"></div>
+        <div class="field"><label>Cédula <span class="req">*</span></label><input type="text" name="cedula" placeholder="V-12.345.678" data-required></div>
+        <div class="field"><label>Nombres <span class="req">*</span></label><input type="text" name="nombres" placeholder="María Gabriela" data-required></div>
+        <div class="field"><label>Apellidos <span class="req">*</span></label><input type="text" name="apellidos" placeholder="Rodríguez Peña" data-required></div>
+        <div class="field"><label>Teléfono <span class="req">*</span></label><input type="text" name="telefono" placeholder="0412-555-0134" data-required></div>
+        <div class="field span2"><label>Correo electrónico <span class="req">*</span></label><input type="email" name="correo" placeholder="nombre@senamecf.gob.ve" data-required></div>
         <div class="form-foot">
             <button class="btn btn-ghost" type="reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Limpiar</button>
             <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>Guardar empleado</button>

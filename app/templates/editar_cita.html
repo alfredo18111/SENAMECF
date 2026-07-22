@@ -12,10 +12,10 @@
         <div><h2>Cita #{{ cita.id_cita }}</h2><p>Actualiza la fecha, hora y estado de la cita</p></div>
     </div>
     <form class="form cols-2" method="POST">
-        <div class="field"><label>Fecha</label><input type="date" name="fecha_cita" value="{{ cita.fecha_cita }}"></div>
-        <div class="field"><label>Hora</label><input type="time" name="hora_cita" value="{{ cita.hora_cita }}"></div>
-        <div class="field span2"><label>Estado</label>
-            <select name="estado_cita">
+        <div class="field"><label>Fecha <span class="req">*</span></label><input type="date" name="fecha_cita" value="{{ cita.fecha_cita }}" data-required></div>
+        <div class="field"><label>Hora <span class="req">*</span></label><input type="time" name="hora_cita" value="{{ cita.hora_cita }}" data-required></div>
+        <div class="field span2"><label>Estado <span class="req">*</span></label>
+            <select name="estado_cita" data-required>
                 <option value="Pendiente" {% if cita.estado_cita == "Pendiente" %}selected{% endif %}>Pendiente</option>
                 <option value="Atendida" {% if cita.estado_cita == "Atendida" %}selected{% endif %}>Atendida</option>
                 <option value="Cancelada" {% if cita.estado_cita == "Cancelada" %}selected{% endif %}>Cancelada</option>

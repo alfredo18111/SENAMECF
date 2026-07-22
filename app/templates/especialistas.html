@@ -12,10 +12,10 @@
         <div><h2>Registrar especialista</h2><p>Asigna a un empleado una especialización y su horario</p></div>
     </div>
     <form class="form" action="/especialistas/nuevo" method="POST">
-        <div class="field span2"><label>Especialista</label>
+        <div class="field span2"><label>Especialista <span class="req">*</span></label>
             <div class="combo">
                 <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
-                <input type="hidden" name="empleado" class="combo-value">
+                <input type="hidden" name="empleado" class="combo-value" data-required>
                 <div class="combo-list">
                     {% for empleado in empleados %}
                     <div class="combo-opt" data-value="{{ empleado.id_empleado }}">{{ empleado.nombres }} {{ empleado.apellidos }}</div>
@@ -24,10 +24,10 @@
                 </div>
             </div>
         </div>
-        <div class="field"><label>Especialización</label>
+        <div class="field"><label>Especialización <span class="req">*</span></label>
             <div class="combo">
                 <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
-                <input type="hidden" name="especializacion" class="combo-value">
+                <input type="hidden" name="especializacion" class="combo-value" data-required>
                 <div class="combo-list">
                     {% for especializacion in especializaciones %}
                     <div class="combo-opt" data-value="{{ especializacion.id_especializacion }}">{{ especializacion.nombre_especializacion }}</div>
@@ -36,9 +36,9 @@
                 </div>
             </div>
         </div>
-        <div class="field"><label>Hora inicio</label><input type="time" name="hora_inicio"></div>
-        <div class="field"><label>Hora fin</label><input type="time" name="hora_fin"></div>
-        <div class="field"><label>Días disponibles</label><input type="text" name="dias_disponibles" placeholder="Lun a Vie"></div>
+        <div class="field"><label>Hora inicio <span class="req">*</span></label><input type="time" name="hora_inicio" data-required></div>
+        <div class="field"><label>Hora fin <span class="req">*</span></label><input type="time" name="hora_fin" data-required></div>
+        <div class="field"><label>Días disponibles <span class="req">*</span></label><input type="text" name="dias_disponibles" placeholder="Lun a Vie" data-required></div>
         <div class="form-foot">
             <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>Guardar especialista</button>
         </div>

@@ -12,8 +12,8 @@
         <div><h2>Registrar rol</h2><p>Define un rol de acceso del sistema</p></div>
     </div>
     <form class="form cols-2" action="/roles/nuevo" method="POST">
-        <div class="field"><label>Nombre del rol</label><input type="text" name="nombre_rol" placeholder="Administrador"></div>
-        <div class="field"><label>Descripción</label><input type="text" name="descripcion" placeholder="Acceso total al sistema"></div>
+        <div class="field"><label>Nombre del rol <span class="req">*</span></label><input type="text" name="nombre_rol" placeholder="Administrador" data-required></div>
+        <div class="field"><label>Descripción <span class="req">*</span></label><input type="text" name="descripcion" placeholder="Acceso total al sistema" data-required></div>
         <div class="form-foot">
             <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>Guardar rol</button>
         </div>

@@ -12,10 +12,10 @@
         <div><h2>Registrar cita</h2><p>Agenda una cita entre un empleado y un especialista</p></div>
     </div>
     <form class="form" method="POST" action="{{ url_for('main.nueva_cita') }}">
-        <div class="field"><label>Empleado</label>
+        <div class="field"><label>Empleado <span class="req">*</span></label>
             <div class="combo">
                 <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
-                <input type="hidden" name="id_empleado" class="combo-value">
+                <input type="hidden" name="id_empleado" class="combo-value" data-required>
                 <div class="combo-list">
                     {% for empleado in empleados %}
                     <div class="combo-opt" data-value="{{ empleado.id_empleado }}">{{ empleado.nombres }}</div>
@@ -24,10 +24,10 @@
                 </div>
             </div>
         </div>
-        <div class="field span2"><label>Especialista</label>
+        <div class="field span2"><label>Especialista <span class="req">*</span></label>
             <div class="combo">
                 <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
-                <input type="hidden" name="id_empleado_especialista" class="combo-value">
+                <input type="hidden" name="id_empleado_especialista" class="combo-value" data-required>
                 <div class="combo-list">
                     {% for especialista in especialistas %}
                     <div class="combo-opt" data-value="{{ especialista.id_empleado }}">{{ especialista.empleado.nombres }} {{ especialista.empleado.apellidos }} - {{ especialista.especializacion.nombre_especializacion }}</div>
@@ -36,10 +36,10 @@
                 </div>
             </div>
         </div>
-        <div class="field"><label>Fecha</label><input type="date" name="fecha_cita"></div>
-        <div class="field"><label>Hora</label><input type="time" name="hora_cita"></div>
-        <div class="field"><label>Estado</label>
-            <select name="estado_cita">
+        <div class="field"><label>Fecha <span class="req">*</span></label><input type="date" name="fecha_cita" data-required></div>
+        <div class="field"><label>Hora <span class="req">*</span></label><input type="time" name="hora_cita" data-required></div>
+        <div class="field"><label>Estado <span class="req">*</span></label>
+            <select name="estado_cita" data-required>
                 <option value="Pendiente">Pendiente</option>
                 <option value="Atendida">Atendida</option>
                 <option value="Cancelada">Cancelada</option>

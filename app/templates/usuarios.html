@@ -12,10 +12,10 @@
         <div><h2>Registrar usuario</h2><p>Crea una cuenta de acceso vinculada a un empleado</p></div>
     </div>
     <form class="form" action="{{ url_for('main.nuevo_usuario') }}" method="POST">
-        <div class="field"><label>Empleado</label>
+        <div class="field"><label>Empleado <span class="req">*</span></label>
             <div class="combo">
                 <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
-                <input type="hidden" name="id_empleado" class="combo-value">
+                <input type="hidden" name="id_empleado" class="combo-value" data-required>
                 <div class="combo-list">
                     {% for empleado in empleados %}
                     <div class="combo-opt" data-value="{{ empleado.id_empleado }}">{{ empleado.nombres }} {{ empleado.apellidos }}</div>
@@ -24,10 +24,10 @@
                 </div>
             </div>
         </div>
-        <div class="field"><label>Rol</label>
+        <div class="field"><label>Rol <span class="req">*</span></label>
             <div class="combo">
                 <input type="text" class="combo-input" placeholder="Escribe para buscar…" autocomplete="off">
-                <input type="hidden" name="id_rol" class="combo-value">
+                <input type="hidden" name="id_rol" class="combo-value" data-required>
                 <div class="combo-list">
                     {% for rol in roles %}
                     <div class="combo-opt" data-value="{{ rol.id_rol }}">{{ rol.nombre_rol }}</div>
@@ -36,14 +36,14 @@
                 </div>
             </div>
         </div>
-        <div class="field"><label>Estado</label>
-            <select name="estado">
+        <div class="field"><label>Estado <span class="req">*</span></label>
+            <select name="estado" data-required>
                 <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>
             </select>
         </div>
-        <div class="field"><label>Usuario</label><input type="text" name="usuario" placeholder="jperez"></div>
-        <div class="field"><label>Clave</label><input type="password" name="clave" placeholder="••••••••"></div>
+        <div class="field"><label>Usuario <span class="req">*</span></label><input type="text" name="usuario" placeholder="jperez" data-required></div>
+        <div class="field"><label>Clave <span class="req">*</span></label><input type="password" name="clave" placeholder="••••••••" data-required></div>
         <div class="form-foot">
             <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg>Guardar usuario</button>
         </div>

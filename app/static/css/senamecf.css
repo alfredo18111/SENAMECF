@@ -45,11 +45,9 @@ body{
 /* ---------------- Barra lateral ---------------- */
 .side{background:var(--navy);color:#fff;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
 .brand{display:flex;align-items:center;gap:12px;padding:22px 20px 20px}
-.mark{width:44px;height:44px;border-radius:10px;background:var(--navy-700);border:2px solid rgba(255,255,255,.9);
-      display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;position:relative}
-.mark svg{width:26px;height:26px}
-.mark .ribbon{position:absolute;bottom:0;left:0;right:0;height:6px;display:flex}
-.mark .ribbon i{flex:1}
+.brand-logo{width:46px;height:46px;border-radius:10px;background:#fff;flex-shrink:0;padding:4px;
+      display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.brand-logo img{width:100%;height:100%;object-fit:contain;display:block}
 .brand-txt b{font-size:16px;letter-spacing:.06em;display:block;line-height:1}
 .brand-txt span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 
@@ -212,9 +210,10 @@ table.tbl tbody tr:hover{background:#F8FAFD}
 .login-head{background:var(--navy);color:#fff;padding:30px 32px 26px;text-align:center;position:relative}
 .login-head .ribbon{position:absolute;bottom:0;left:0;right:0;height:5px;display:flex}
 .login-head .ribbon i{flex:1}
-.login-mark{width:66px;height:66px;border-radius:16px;background:var(--navy-700);border:2.5px solid rgba(255,255,255,.9);
-            margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
-.login-mark svg{width:38px;height:38px;stroke:#fff}
+.login-mark{width:82px;height:82px;border-radius:18px;background:#fff;padding:8px;
+            margin:0 auto 14px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+            box-shadow:0 6px 18px rgba(0,0,0,.22)}
+.login-mark img{width:100%;height:100%;object-fit:contain;display:block}
 .login-head h1{font-size:22px;letter-spacing:.08em;margin:0}
 .login-head p{font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.7);margin:4px 0 0;text-transform:uppercase}
 .login-body{padding:28px 32px 32px}
@@ -283,3 +282,25 @@ table.tbl tbody tr:hover{background:#F8FAFD}
   .tbar{gap:10px}
   .search{max-width:none}
 }
+
+/* ---------------- Modal de campos obligatorios ---------------- */
+.modal-ov{position:fixed;inset:0;z-index:100;padding:24px;display:flex;align-items:center;justify-content:center;
+          background:rgba(6,20,45,.5);animation:modalFade .15s ease}
+.modal-ov[hidden]{display:none}
+.modal-box{background:var(--card);width:410px;max-width:100%;border-radius:16px;padding:28px 28px 24px;text-align:center;
+           box-shadow:0 24px 60px rgba(6,20,45,.35);animation:modalPop .18s ease}
+.modal-ic{width:56px;height:56px;border-radius:50%;background:var(--amber-tint);color:var(--amber);
+          margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
+.modal-ic svg{width:30px;height:30px}
+.modal-box h3{margin:0 0 6px;font-size:17px;color:var(--ink)}
+.modal-box p{margin:0 0 16px;font-size:13.5px;color:var(--ink-2)}
+.modal-list{list-style:none;margin:0 0 20px;padding:0;text-align:left;display:flex;flex-direction:column;gap:7px}
+.modal-list li{font-size:13.5px;color:var(--ink);background:var(--page);border:1px solid var(--border);
+               border-radius:8px;padding:9px 12px;display:flex;align-items:center;gap:9px}
+.modal-list li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0}
+.modal-foot{display:flex;justify-content:center}
+.modal-foot .btn{min-width:150px;justify-content:center}
+.field.invalid input,.field.invalid select,.field.invalid .combo-input{
+          border-color:var(--red)!important;box-shadow:0 0 0 3px rgba(207,20,43,.14)!important}
+@keyframes modalFade{from{opacity:0}to{opacity:1}}
+@keyframes modalPop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
