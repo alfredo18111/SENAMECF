@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_helpers.html" import empleado_opcion %}
 
 {% block titulo %}Citas{% endblock %}
 {% block crumb %}Servicios Médicos · <b>Citas</b>{% endblock %}
@@ -18,7 +19,7 @@
                 <input type="hidden" name="id_empleado" class="combo-value" data-required>
                 <div class="combo-list">
                     {% for empleado in empleados %}
-                    <div class="combo-opt" data-value="{{ empleado.id_empleado }}">{{ empleado.nombres }}</div>
+                    <div class="combo-opt" data-value="{{ empleado.id_empleado }}">{{ empleado_opcion(empleado) }}</div>
                     {% endfor %}
                     <div class="combo-empty">Sin resultados</div>
                 </div>
@@ -30,7 +31,7 @@
                 <input type="hidden" name="id_empleado_especialista" class="combo-value" data-required>
                 <div class="combo-list">
                     {% for especialista in especialistas %}
-                    <div class="combo-opt" data-value="{{ especialista.id_empleado }}">{{ especialista.empleado.nombres }} {{ especialista.empleado.apellidos }} - {{ especialista.especializacion.nombre_especializacion }}</div>
+                    <div class="combo-opt" data-value="{{ especialista.id_empleado }}">{{ empleado_opcion(especialista.empleado) }} - {{ especialista.especializacion.nombre_especializacion }}</div>
                     {% endfor %}
                     <div class="combo-empty">Sin resultados</div>
                 </div>

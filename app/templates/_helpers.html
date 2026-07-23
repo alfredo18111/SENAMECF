@@ -1,0 +1,10 @@
+{# ------------------------------------------------------------------ #}
+{# Helpers de presentación reutilizables (macros Jinja).               #}
+{# ------------------------------------------------------------------ #}
+
+{# Etiqueta de un empleado para los combos de selección.
+   Formato: "{cedula} - {nombres} {apellidos}" (la cédula desambigua homónimos).
+   El value del combo sigue siendo el id; esto solo cambia el texto visible. #}
+{% macro empleado_opcion(empleado) -%}
+{% if empleado.cedula %}{{ empleado.cedula }} - {% endif %}{{ empleado.nombres }} {{ empleado.apellidos }}
+{%- endmacro %}
